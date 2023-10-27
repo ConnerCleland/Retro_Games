@@ -1,0 +1,13 @@
+#tetrisCanvas {
+    background-color: #f0f0f0;
+    border: 1px solid #ccc; 
+    margin: 20px auto;
+}
+
+.red-block {
+    background-color: #ff0000;
+}
+
+.lightgray-block {
+    background-color: #d3d3d3;
+}

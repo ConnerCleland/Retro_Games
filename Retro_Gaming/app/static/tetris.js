@@ -1,5 +1,3 @@
-// app/static/tetris.js
-
 document.addEventListener('DOMContentLoaded', () => {
     console.log('DOM loaded');
 
@@ -7,35 +5,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctx = canvas.getContext('2d');
 
     const blockWidth = 20;
-    const blockHeight = 20;
+    const blockHeight = 10;
 
-    // Define the game grid
     const grid = {
-        rows: 10,
+        rows: 20,
         columns: 10,
     };
 
-    // Placeholder for the current active block
     let activeBlock = null;
-
-    // 2D array to represent the grid state
+    let fallSpeed = 250; 
     const gameGrid = Array.from({ length: grid.rows }, () => Array(grid.columns).fill(null));
 
     function drawBlock(x, y, color) {
         ctx.fillStyle = color;
         ctx.fillRect(x * blockWidth, y * blockHeight, blockWidth, blockHeight);
+        ctx.strokeStyle = 'white';
+        ctx.strokeRect(x * blockWidth, y * blockHeight, blockWidth, blockHeight);
     }
 
     function drawGrid() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-        // Draw the grid
+    
         for (let row = 0; row < grid.rows; row++) {
             for (let col = 0; col < grid.columns; col++) {
                 if (gameGrid[row][col]) {
                     drawBlock(col, row, 'red');
                 } else {
-                    drawBlock(col, row, 'lightgray');
+                    drawBlock(col, row, 'gray');
                 }
             }
         }
@@ -43,12 +39,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Draw the active block
         if (activeBlock) {
             drawBlock(activeBlock.x, activeBlock.y, 'red');
+            drawBlock(activeBlock.x, activeBlock.y, 'blue', 2,1)
         }
     }
 
     function moveBlock(direction) {
+        console.log('Moving block:', direction);
         if (!activeBlock) {
-            // Create a new block if none exists
             activeBlock = { x: 0, y: 0 };
         }
 
@@ -74,6 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 rotateBlock();
                 break;
         }
+        console.log('New block position:', activeBlock);
 
         drawGrid();
     }
@@ -95,7 +93,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const newX = activeBlock.x + dx;
         const newY = activeBlock.y + dy;
 
-        // Check for collision with the game grid boundaries
         if (newX < 0 || newX >= grid.columns || newY < 0 || newY >= grid.rows) {
             return true;
         }
@@ -128,14 +125,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function lockBlock() {
-        // Lock the active block in the game grid
-        gameGrid[activeBlock.y][activeBlock.x] = true;
+        if (activeBlock) {
+            // Lock the active block in the game grid
+            gameGrid[activeBlock.y][activeBlock.x] = true;
 
-        // Clear completed rows (to be implemented)
-        clearCompletedRows();
+            // Clear completed rows (to be implemented)
+            clearCompletedRows();
 
-        // Reset the active block
-        activeBlock = null;
+            // Reset the active block
+            activeBlock = null;
+
+        }
     }
 
     function clearCompletedRows() {
@@ -147,6 +147,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 // Add a new empty row at the top
                 gameGrid.unshift(Array(grid.columns).fill(null));
+
             }
         }
     }
@@ -158,22 +159,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateGame() {
         if (canMoveDown() && !checkCollision(0, 1)) {
-            // Move the block down if possible
             activeBlock.y += 1;
         } else {
-            // Lock the block in place if it can't move down
             lockBlock();
         }
-    }
-
-    function gameLoop() {
-        updateGame();
         drawGrid();
-        requestAnimationFrame(gameLoop);
+    
+        // Use setTimeout for controlling the speed
+        setTimeout(updateGame, fallSpeed);
     }
-
-    // Start the game loop
-    gameLoop();
 
     document.addEventListener('keydown', (event) => {
         const directionKeys = ['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp'];
@@ -182,4 +176,6 @@ document.addEventListener('DOMContentLoaded', () => {
             moveBlock(event.key);
         }
     });
+
+    updateGame();
 });
