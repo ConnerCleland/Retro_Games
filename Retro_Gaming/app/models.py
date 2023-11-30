@@ -7,6 +7,7 @@ class Game(models.Model):
 
 
 class Block(models.Model):
+    game = models.ForeignKey(Game, on_delete=models.CASCADE)
     position_x = models.IntegerField()
     position_y = models.IntegerField()
     color = models.CharField(max_length=50)

@@ -1,11 +1,11 @@
 from django.shortcuts import render
-from .models import Game, Block
+from .models import Game
 
 
 def start_game(request):
     game = Game.objects.create()
-    grid_columns = 10  # Replace with your actual value
-    grid_rows = 10  # Replace with your actual value
+    grid_columns = 10
+    grid_rows = 10
     block_width = 20
     block_height = 20
 
@@ -23,6 +23,12 @@ def start_game(request):
     )
 
 
-def move_block(request):
-    block = Block.objects.create(position_x=0, position_y=0, color="red")
-    return render(request, "app/move_block.html", {"block": block})
+def Snake_game(request):
+    return render(
+        request,
+        "app/Snake.html",
+    )
+
+
+def Welcome(request):
+    return render(request, "app/Welcom.html")

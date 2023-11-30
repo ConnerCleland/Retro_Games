@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Retro Gaming</title>
+    <link rel="stylesheet" href="{% static 'start_page.css' %}">
+</head>
+<body>
+    <br>
+    <br>
+    <br>
+    
+    <br>
+    <div class="background"> 
+    <h1 >Retro Gaming</h1>
+    </div>
+    <br>
+    <br>
+
+    
+    <main class="page-content">
+        <div class="card">
+            <div class="content">
+                <h2 class="title">Snake</h2>
+                <p class="copy">
+                  "This game is about a snake who eats to gain length"
+                </p>
+                <button class="btn">
+                    <a href="{% url 'Snake' %}">
+                        Play Game
+                    </a>
+
+                </button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="content">
+                <h2 class="title">To The Beach</h2>
+                <p class="copy">
+                  Plan your next beach trip with these fabulous destinations
+                </p>
+                <button class="btn">View Trips</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="content">
+                <h2 class="title">Desert Destinations</h2>
+                <p class="copy">It's the desert you've always dreamed of</p>
+                <button class="btn">Book Now</button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="content">
+                <h2 class="title">Explore The Galaxy</h2>
+                <p class="copy">
+                  Seriously, straight up, just blast off into outer space today
+                </p>
+                <button class="btn">Book Now</button>
+            </div>
+        </div>
+    </main>
+    <br>
+    <h1>Contact Me</h1>
+</body>
+</html>
