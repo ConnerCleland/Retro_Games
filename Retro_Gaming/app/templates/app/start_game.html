@@ -5,9 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tetris Game</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'tetris.css' %}">
 </head>
 <body>
+    <button onclick="goBack()">Go Back</button>
     <div id="game-container">
         <h1>Tetris Game</h1>
         <p>Score: <span id="score">0</span></p>
@@ -51,7 +52,7 @@
 
             const tetrominos = [
                 [
-                    [1, 1, 1],
+                    [1, 1, 1, 1]
                 ],
                 [
                     [1, 1],
@@ -99,7 +100,6 @@
                     updateScore();
                 }
             }
-            
             function updateScore() {
                 const scoreElement = document.getElementById('score');
                 scoreElement.innerHTML = score;
@@ -450,6 +450,9 @@
             updateGame();
             HoldCanvas();
         });
+        function goBack() {
+            window.history.back();
+        }
     </script>
 </body>
 </html>

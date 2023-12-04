@@ -23,14 +23,33 @@
       height: 80%;
       left: 10%
     }
+
+    #gameOverScreen {
+      display: none;
+      position: absolute;
+      z-index: 6;
+      left: 10%;
+      width: 80%;
+      height: 80%;
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+      font-size: 60px;
+      text-align: center;
+      padding-top: 0%;
+    }
   </style>
 </head>
 <body>
-  <h1>Snake Game</h1>
   <button onclick="goBack()">Go Back</button>
+  <h1>Snake Game</h1>
   <br>
   <canvas id="websiteCanvas" width="100%" height="100%"></canvas>
   <canvas id="gameCanvas" width="400" height="200"></canvas>
+  <div id="gameOverScreen">
+    <p>Game Over!</p>
+    <p>Your Score: <span id="finalScore"></span></p>
+    <button onclick="resetGame()">Play Again</button>
+  </div>
   <script>
     const websiteCanvas = document.getElementById("websiteCanvas");
     const websiteCtx = websiteCanvas.getContext("2d");
@@ -38,12 +57,16 @@
     const gameCanvas = document.getElementById("gameCanvas");
     const gameCtx = gameCanvas.getContext("2d");
 
+    const gameOverScreen = document.getElementById("gameOverScreen");
+    const finalScoreElement = document.getElementById("finalScore");
+
     const boxSize = 20;
     let snake = [{ x: 2, y: 2 }];
     let food = { x: 5, y: 5 };
     let direction = "right";
     let score = 0;
     let isPaused = false;
+    let gameTimeout; // Added variable for the timeout
 
     function drawGame() {
       gameCtx.clearRect(0, 0, gameCanvas.width, gameCanvas.height);
@@ -51,7 +74,7 @@
       gameCtx.fillStyle = "#00f";
       gameCtx.fillRect(0, 0, gameCanvas.width, gameCanvas.height);
 
-      gameCtx.fillStyle = "#ff0";
+      gameCtx.fillStyle = "#0f0";
       snake.forEach(segment => {
         gameCtx.fillRect(segment.x * boxSize, segment.y * boxSize, boxSize, boxSize);
       });
@@ -109,8 +132,7 @@
         head.y >= gameCanvas.height / boxSize ||
         collision(head, snake)
       ) {
-        alert("Game Over! Your Score: " + score);
-        resetGame();
+        showGameOverScreen();
         return;
       }
 
@@ -121,11 +143,24 @@
       return array.some(segment => segment.x === head.x && segment.y === head.y);
     }
 
+    function showGameOverScreen() {
+      gameOverScreen.style.display = "block";
+      finalScoreElement.textContent = score;
+    }
+
     function resetGame() {
+      gameOverScreen.style.display = "none";
       snake = [{ x: 2, y: 2 }];
       food = { x: 5, y: 5 };
       direction = "right";
       score = 0;
+
+      // Clear existing timeout
+      clearTimeout(gameTimeout);
+
+      // Restart the game loop
+      gameLoop();
+      drawGame();
     }
 
     function changeDirection(e) {
@@ -167,7 +202,7 @@
     function gameLoop() {
       move();
       drawGame();
-      setTimeout(gameLoop, 200); 
+      gameTimeout = setTimeout(gameLoop, 200);
     }
 
     function goBack() {

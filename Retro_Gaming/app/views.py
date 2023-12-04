@@ -32,3 +32,15 @@ def Snake_game(request):
 
 def Welcome(request):
     return render(request, "app/Welcom.html")
+
+
+def Pong_game(request):
+    return render(request, "app/Pong.html")
+
+
+def Dino_game(request):
+    return render(request, "app/dino.html")
+
+
+def PacMan_game(request):
+    return render(request, "app/PacMan.html")

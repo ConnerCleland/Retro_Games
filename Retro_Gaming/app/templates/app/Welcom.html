@@ -13,54 +13,78 @@
     
     <br>
     <div class="background"> 
-    <h1 >Retro Gaming</h1>
+        <h1>Retro Gaming</h1>
     </div>
     <br>
     <br>
 
-    
     <main class="page-content">
-        <div class="card">
-            <div class="content">
-                <h2 class="title">Snake</h2>
-                <p class="copy">
-                  "This game is about a snake who eats to gain length"
-                </p>
-                <button class="btn">
-                    <a href="{% url 'Snake' %}">
-                        Play Game
-                    </a>
-
-                </button>
+        <div class="card-container">
+            <div class="card">
+                <div class="content">
+                    <h2 class="title"></h2>
+                    <p class="copy">
+                      "This game is about a snake who eats to gain length"
+                    </p>
+                    <button class="btn">
+                        <a href="{% url 'Snake' %}">
+                            Play Game
+                        </a>
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <h2 class="title">To The Beach</h2>
-                <p class="copy">
-                  Plan your next beach trip with these fabulous destinations
-                </p>
-                <button class="btn">View Trips</button>
+            <div class="card">
+                <div class="content">
+                    <h2 class="title"></h2>
+                    <p class="copy">
+                      "This game is about block building and soaring levels"
+                    </p>
+                    <button class="btn">
+                        <a href="{% url 'start_game' %}">
+                            Play Game
+                        </a>
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <h2 class="title">Desert Destinations</h2>
-                <p class="copy">It's the desert you've always dreamed of</p>
-                <button class="btn">Book Now</button>
+            <div class="card">
+                <div class="content">
+                    <h2 class="title"></h2>
+                    <p class="copy">"Two players control paddles to hit a bouncing ball back and forth"</p>
+                    <button class="btn">
+                        <a href="{% url 'Pong' %}">
+                            Play Game
+                        </a>
+                    </button>
+                </div>
             </div>
-        </div>
-        <div class="card">
-            <div class="content">
-                <h2 class="title">Explore The Galaxy</h2>
-                <p class="copy">
-                  Seriously, straight up, just blast off into outer space today
-                </p>
-                <button class="btn">Book Now</button>
+            <div class="card">
+                <div class="content">
+                    <h2 class="title"></h2>
+                    <p class="copy">
+                        "Small dino jumping over obsticals"
+                    </p>
+                    <button class="btn">
+                        <a href="{% url 'dino' %}">
+                            Play Game
+                        </a>
+                    </button>
+                </div>
+            </div>
+            <div class="card">
+                <div class="content">
+                    <h2 class="title"></h2>
+                    <p class="copy">
+                        "Small dino jumping over obsticals"
+                    </p>
+                    <button class="btn">
+                        <a href="{% url 'PacMan' %}">
+                            Play Game
+                        </a>
+                    </button>
+                </div>
             </div>
         </div>
     </main>
     <br>
-    <h1>Contact Me</h1>
 </body>
 </html>
