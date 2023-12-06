@@ -44,3 +44,6 @@ def Dino_game(request):
 
 def PacMan_game(request):
     return render(request, "app/PacMan.html")
+
+def Space_game(request):
+    return render(request, "app/space.html")
