@@ -31,7 +31,7 @@ def Snake_game(request):
 
 
 def Welcome(request):
-    return render(request, "app/Welcom.html")
+    return render(request, "app/index.html")
 
 
 def Pong_game(request):
