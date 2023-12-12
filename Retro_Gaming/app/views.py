@@ -30,7 +30,7 @@ def Snake_game(request):
     )
 
 
-def Welcome(request):
+def index(request):
     return render(request, "app/index.html")
 
 

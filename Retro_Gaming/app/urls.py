@@ -1,10 +1,10 @@
 from django.urls import path
-from .views import start_game, Snake_game, Welcome, Pong_game, Dino_game, PacMan_game,Space_game
+from .views import start_game, Snake_game, index, Pong_game, Dino_game, PacMan_game,Space_game
 from django.conf import settings
 from django.conf.urls.static import static
 
 urlpatterns = [
-    path("", Welcome, name="index"),
+    path("", index, name="index"),
     path("start/", start_game, name="start_game"),
     path("snake/", Snake_game, name="Snake"),
     path("Pong/", Pong_game, name="Pong"),
